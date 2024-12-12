@@ -5,7 +5,7 @@ services:
   lemon-alpine:
     image: lemon-alpine:latest
     build:
-      context: ../
+      context: ../..
       dockerfile: docker/alpine.Dockerfile
       cache_from:
         - lemon-alpine:latest
@@ -13,7 +13,7 @@ services:
   lemon-ubuntu:
     image: lemon-ubuntu:latest
     build:
-      context: ../
+      context: ../..
       dockerfile: docker/ubuntu.Dockerfile
       cache_from:
         - lemon-ubuntu:latest
@@ -21,7 +21,7 @@ services:
   lemon-debian:
     image: lemon-debian:latest
     build:
-      context: ../
+      context: ../..
       dockerfile: docker/debian.Dockerfile
       cache_from:
         - lemon-debian:latest
@@ -29,7 +29,7 @@ services:
   lemon-archlinux:
     image: lemon-archlinux:latest
     build:
-      context: ../
+      context: ../..
       dockerfile: docker/archlinux.Dockerfile
       cache_from:
         - lemon-archlinux:latest

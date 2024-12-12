@@ -8,21 +8,20 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 100
     steps:
-    - uses: KengoTODA/actions-setup-docker-compose@v1
     - uses: actions/checkout@v4
     - name: Ubuntu
       run: |
         cd .github/docker
-        docker-compose up --build lemon-ubuntu
+        docker compose up --build lemon-ubuntu
     - name: Alpine
       run: |
         cd .github/docker
-        docker-compose up --build lemon-alpine
+        docker compose up --build lemon-alpine
     - name: Debian
       run: |
         cd .github/docker
-        docker-compose up --build lemon-debian
+        docker compose up --build lemon-debian
     - name: Archlinux
       run: |
         cd .github/docker
-        docker-compose up --build lemon-archlinux
+        docker compose up --build lemon-archlinux
