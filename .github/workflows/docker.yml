@@ -1,0 +1,27 @@
+name: Docker
+
+on: [push, pull_request]
+
+jobs:
+  # Building using the github runner environement directly.
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 100
+    steps:
+    - uses: actions/checkout@v4
+    - name: Ubuntu
+      run: |
+        cd .github/docker
+        docker-compose up --build lemon-ubuntu
+    - name: Alpine
+      run: |
+        cd .github/docker
+        docker-compose up --build lemon-alpine
+    - name: Debian
+      run: |
+        cd .github/docker
+        docker-compose up --build lemon-debian
+    - name: Archlinux
+      run: |
+        cd .github/docker
+        docker-compose up --build lemon-archlinux
