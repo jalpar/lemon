@@ -1,0 +1,22 @@
+name: Cpp (Ubuntu and MacOS)
+
+on: [push, pull_request]
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [macos-latest, ubuntu-latest]
+        cxx_std: [11, 17]
+    timeout-minutes: 100
+    steps:
+    - uses: actions/checkout@v4
+    - uses: komiya-atsushi/action-enforce-timeout-minutes@v1.0.0
+    - name: Configure
+      run: cmake -S . -Bbuild -DLEMON_CXX_STANDARD=${{ matrix.cxx_std }} -DLEMON_MAINTAINER_MODE=ON -DLEMON_BUILD_TESTING=ON
+    - name: Build and Test
+      run: cmake --build build --target all -v
+    - name: Install
+      run: cmake --build build --target install -v -- DESTDIR=install
+      continue-on-error: true

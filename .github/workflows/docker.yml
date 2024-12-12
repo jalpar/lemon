@@ -1,0 +1,34 @@
+name: Docker
+
+on: [push, pull_request]
+
+jobs:
+  # Building using the github runner environement directly.
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 100
+    steps:
+    - uses: actions/checkout@v4
+    - name: List all files
+      run: |
+        ls -last
+        ls -last .github/
+        ls -last .github/docker
+    - name: Ubuntu
+      working-directory: ./.github/docker
+      run: |
+        ls -last .github/docker
+        docker compose up --build lemon-ubuntu
+    - name: Alpine
+      working-directory: ./.github/docker
+      run: |
+        docker compose up --build lemon-alpine
+    - name: Debian
+      working-directory: ./.github/docker
+      run: |
+        cd .github/docker
+        docker compose up --build lemon-debian
+    - name: Archlinux
+      working-directory: ./.github/docker
+      run: |
+        docker compose up --build lemon-archlinux

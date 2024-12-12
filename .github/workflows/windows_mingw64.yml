@@ -1,0 +1,24 @@
+name: Windows MinGW
+
+on: [push, pull_request]
+
+jobs:
+  # Building using the github runner environement directly.
+  build:
+    runs-on: windows-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        cxx_std: [11, 17]
+    timeout-minutes: 60
+    steps:
+    - uses: actions/checkout@v4
+    - uses: komiya-atsushi/action-enforce-timeout-minutes@v1.0.0
+    - name: Check cmake
+      run: cmake --version
+    - name: Configure
+      run: cmake -S. -Bbuild -G "MinGW Makefiles" -DLEMON_CXX_STANDARD=${{ matrix.cxx_std }} -DLEMON_MAINTAINER_MODE=ON -DLEMON_BUILD_TESTING=ON
+    - name: Build
+      run: cmake --build build --config Release --target all -v
+    - name: Test
+      run: cd build && ctest --verbose
