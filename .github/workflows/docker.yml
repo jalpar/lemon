@@ -9,6 +9,11 @@ jobs:
     timeout-minutes: 100
     steps:
     - uses: actions/checkout@v4
+      sparse-checkout: |
+        .github
+        .
+    - name: List all files
+      run: ls -last
     - name: Ubuntu
       run: |
         cd .github/docker
