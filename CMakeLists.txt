@@ -24,14 +24,13 @@ list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 
 project(LEMON LANGUAGES CXX C)
 
+set(LEMON_VERSION
+    $ENV{LEMON_VERSION}
+    CACHE STRING "LEMON version string.")
 # Get version
 find_package(Hg)
 if(EXISTS ${PROJECT_SOURCE_DIR}/cmake/LEMONVersion.cmake)
   include(${PROJECT_SOURCE_DIR}/cmake/LEMONVersion.cmake)
-elseif(DEFINED ENV{LEMON_VERSION})
-  set(LEMON_VERSION
-      $ENV{LEMON_VERSION}
-      CACHE STRING "LEMON version string.")
 elseif(HG_FOUND)
   execute_process(
     COMMAND hg log -r. --template "{latesttag}"
@@ -71,6 +70,8 @@ if("${LEMON_VERSION}" STREQUAL "")
   set(LEMON_VERSION "unknown")
 endif()
 message(STATUS "LEMON Version: ${LEMON_VERSION}")
+
+set(PROJECT_VERSION ${LEMON_VERSION})
 
 # OS
 if(WIN32)

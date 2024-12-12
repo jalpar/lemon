@@ -89,8 +89,8 @@ set_target_properties(
   ${NAME}
   PROPERTIES PUBLIC_HEADER "${_HDRS};${CMAKE_CURRENT_BINARY_DIR}/config.h"
              OUTPUT_NAME $<IF:$<BOOL:${UNIX}>,emon,${NAME}>
-             VERSION ${PROJECT_VERSION}
-             SOVERSION ${PROJECT_VERSION_MAJOR})
+             VERSION "${PROJECT_VERSION}"
+             SOVERSION "${PROJECT_VERSION_MAJOR}")
 
 target_include_directories(
   ${NAME} PUBLIC $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}>
