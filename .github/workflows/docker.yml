@@ -9,25 +9,25 @@ jobs:
     timeout-minutes: 100
     steps:
     - uses: actions/checkout@v4
-      with:
-        sparse-checkout: |
-          .github
-          .
     - name: List all files
-      run: ls -last
-    - name: Ubuntu
       run: |
-        cd .github/docker
+        ls -last
+        ls -last .github/
+        ls -last .github/docker
+    - name: Ubuntu
+      working-directory: ./github/docker
+      run: |
         docker compose up --build lemon-ubuntu
     - name: Alpine
+      working-directory: ./github/docker
       run: |
-        cd .github/docker
         docker compose up --build lemon-alpine
     - name: Debian
+      working-directory: ./github/docker
       run: |
         cd .github/docker
         docker compose up --build lemon-debian
     - name: Archlinux
+      working-directory: ./github/docker
       run: |
-        cd .github/docker
         docker compose up --build lemon-archlinux
