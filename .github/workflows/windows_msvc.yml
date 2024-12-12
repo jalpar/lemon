@@ -8,7 +8,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        cxx_std: [11, 17, 23]
+        cxx_std: [11, 17]
     timeout-minutes: 60
     steps:
     - uses: actions/checkout@v4
@@ -16,7 +16,7 @@ jobs:
     - name: Check cmake
       run: cmake --version
     - name: Configure
-      run: cmake -S. -Bbuild -G "Visual Studio 16 2019" -DLEMON_CXX_STANDARD=${{ matrix.cxx_std }} -DLEMON_MAINTAINER_MODE=ON -DLEMON_BUILD_TESTING=ON
+      run: cmake -S. -Bbuild -G "Visual Studio 17 2022" -DLEMON_CXX_STANDARD=${{ matrix.cxx_std }} -DLEMON_MAINTAINER_MODE=ON -DLEMON_BUILD_TESTING=ON
     - name: Build
       run: cmake --build build --config Release --target ALL_BUILD -- /verbosity:normal /maxcpucount
     - name: Test

@@ -8,6 +8,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 100
     steps:
+    - uses: KengoTODA/actions-setup-docker-compose@v1
     - uses: actions/checkout@v4
     - name: Ubuntu
       run: |
